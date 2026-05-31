@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عمو رسول | فست فود ارومیه</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#d4af37;
+  --gold2:#f4d77a;
+  --gold3:rgba(212,175,55,.08);
+  --bg:#060608;
+  --glass:rgba(255,255,255,.06);
+  --glass2:rgba(255,255,255,.10);
+  --glass3:rgba(255,255,255,.03);
+  --border:rgba(255,255,255,.10);
+  --border2:rgba(212,175,55,.25);
+  --text-muted:#888;
+}
+
+html { scroll-behavior: smooth; }
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:Vazirmatn,sans-serif;
+  background:var(--bg);
+  color:#fff;
+  overflow-x:hidden;
+}
+
+/* ── Animated background ── */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 1100px 700px at 75% -5%,  rgba(212,175,55,.13) 0%, transparent 55%),
+    radial-gradient(ellipse 700px 900px at -5% 85%,   rgba(212,175,55,.10) 0%, transparent 55%),
+    radial-gradient(ellipse 500px 500px at 50% 110%,  rgba(180,80,20,.08)  0%, transparent 60%),
+    radial-gradient(ellipse 300px 300px at 95% 55%,   rgba(212,175,55,.06) 0%, transparent 50%);
+  pointer-events:none;
+  z-index:0;
+  animation: bgPulse 10s ease-in-out infinite alternate;
+}
+@keyframes bgPulse{
+  from{ opacity:.7 }
+  to{ opacity:1 }
+}
+
+/* floating orbs */
+body .orb{
+  position:fixed;border-radius:50%;pointer-events:none;z-index:0;
+  filter:blur(80px);opacity:.18;animation:orbFloat 12s ease-in-out infinite alternate;
+}
+@keyframes orbFloat{
+  from{transform:translateY(0) scale(1);}
+  to{transform:translateY(-40px) scale(1.08);}
+}
+
+/* grain removed for performance */
+
+/* ── NAVBAR ── */
+nav{
+  position:fixed;top:0;width:100%;
+  padding:0 5%;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  height:72px;
+  background:rgba(6,6,8,.45);
+  backdrop-filter:blur(32px) saturate(180%);
+  -webkit-backdrop-filter:blur(32px) saturate(180%);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  z-index:1000;
+  transition: background .4s;
+}
+nav.scrolled{
+  background:rgba(6,6,8,.75);
+  border-bottom-color:var(--border2);
+}
+.logo{
+  font-size:24px;font-weight:900;color:var(--gold);
+  letter-spacing:.5px;
+  display:flex;align-items:center;gap:8px;
+}
+.logo-icon{
+  width:36px;height:36px;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;
+}
+.menu{display:flex;gap:28px;align-items:center}
+.menu a{
+  text-decoration:none;
+  color:rgba(255,255,255,.7);
+  font-size:14px;
+  font-weight:500;
+  transition:color .25s;
+  position:relative;
+  padding-bottom:4px;
+}
+.menu a::after{
+  content:'';
+  position:absolute;bottom:0;right:0;
+  width:0;height:1.5px;
+  background:var(--gold);
+  transition:width .3s ease;
+}
+.menu a:hover{color:#fff}
+.menu a:hover::after{width:100%;left:0;right:auto}
+
+.btn{
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  padding:10px 22px;border-radius:50px;
+  color:#111;text-decoration:none;font-weight:800;font-size:14px;
+  transition:transform .25s, box-shadow .25s;
+  box-shadow:0 4px 20px rgba(212,175,55,.3);
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(212,175,55,.45)}
+.btn:active{transform:translateY(0)}
+
+/* ── STATUS BADGE ── */
+.badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 18px;border-radius:50px;
+  background:rgba(255,255,255,.06);
+  backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.12);
+  font-size:13px;
+  margin-bottom:24px;
+  transition: all .4s;
+}
+.badge.open{
+  background:rgba(34,197,94,.1);
+  border-color:rgba(34,197,94,.3);
+  color:#4ade80;
+}
+.badge.closed{
+  background:rgba(239,68,68,.08);
+  border-color:rgba(239,68,68,.25);
+  color:#f87171;
+}
+.badge-dot{
+  width:8px;height:8px;border-radius:50%;
+  animation:pulse 2s infinite;
+}
+.badge.open .badge-dot{ background:#4ade80; }
+.badge.closed .badge-dot{ background:#f87171; animation:none; }
+@keyframes pulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(74,222,128,.4)}
+  50%{box-shadow:0 0 0 6px rgba(74,222,128,0)}
+}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  padding:100px 5% 60px;
+  position:relative;
+  z-index:2;
+  gap:40px;
+}
+.hero-content{z-index:1}
+
+h1{
+  font-size:62px;line-height:1.05;
+  font-weight:900;
+  letter-spacing:-2px;
+}
+.gold{
+  color:var(--gold);
+  text-shadow: 0 0 60px rgba(212,175,55,.35);
+}
+
+.hero-sub{
+  margin:18px 0 28px;
+  color:rgba(255,255,255,.55);
+  font-size:16px;
+  line-height:1.9;
+  max-width:440px;
+}
+
+/* Hero right side — visual panel */
+.hero-visual-panel{
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+  height:480px;
+  z-index:1;
+}
+.hero-img-ring{
+  position:absolute;
+  width:380px;height:380px;border-radius:50%;
+  border:1px solid rgba(212,175,55,.2);
+  animation:ringPulse 4s ease-in-out infinite;
+}
+.hero-img-ring:nth-child(2){
+  width:440px;height:440px;
+  border-color:rgba(212,175,55,.1);
+  animation-delay:.8s;
+}
+.hero-img-ring:nth-child(3){
+  width:500px;height:500px;
+  border-color:rgba(212,175,55,.06);
+  animation-delay:1.6s;
+}
+@keyframes ringPulse{
+  0%,100%{transform:scale(1);opacity:1;}
+  50%{transform:scale(1.03);opacity:.6;}
+}
+.hero-main-img{
+  width:300px;height:300px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid rgba(212,175,55,.4);
+  box-shadow:
+    0 0 80px rgba(212,175,55,.3),
+    0 30px 80px rgba(0,0,0,.6),
+    inset 0 0 40px rgba(212,175,55,.05);
+  position:relative;z-index:2;
+  animation:heroImgFloat 5s ease-in-out infinite;
+  will-change:transform;
+}
+@keyframes heroImgFloat{
+  0%,100%{transform:translateY(0) rotate(-1deg);}
+  50%{transform:translateY(-16px) rotate(1deg);}
+}
+/* floating food badges */
+.food-badge{
+  position:absolute;
+  background:rgba(10,10,15,.85);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(212,175,55,.25);
+  border-radius:50px;
+  padding:8px 14px;
+  font-size:12px;font-weight:700;
+  display:flex;align-items:center;gap:7px;
+  z-index:3;
+  animation:badgeFloat 4s ease-in-out infinite;
+  white-space:nowrap;
+}
+.food-badge .fb-icon{font-size:20px;}
+.food-badge .fb-text{display:flex;flex-direction:column;line-height:1.3;}
+.food-badge .fb-title{color:#fff;font-size:12px;}
+.food-badge .fb-sub{color:var(--gold);font-size:10px;}
+.food-badge:nth-child(5){top:40px;right:-10px;animation-delay:0s;}
+.food-badge:nth-child(6){bottom:80px;right:-30px;animation-delay:1s;}
+.food-badge:nth-child(7){bottom:40px;left:-10px;animation-delay:2s;}
+@keyframes badgeFloat{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-8px);}
+}
+
+/* old floating burger hide */
+.hero-visual{display:none !important;}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;padding:110px 5% 50px;gap:20px;}
+  h1{font-size:46px;}
+  .hero-visual-panel{height:300px;}
+  .hero-main-img{width:220px;height:220px;}
+  .hero-img-ring{display:none;}
+  .food-badge:nth-child(6){display:none;}
+}
+@media(max-width:600px){
+  h1{font-size:38px;}
+  .hero-visual-panel{height:240px;}
+  .hero-main-img{width:190px;height:190px;}
+  .food-badge{font-size:11px;padding:6px 10px;}
+  .food-badge:nth-child(7){display:none;}
+}
+
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn-outline{
+  padding:10px 22px;border-radius:50px;
+  border:1px solid rgba(255,255,255,.15);
+  color:rgba(255,255,255,.75);
+  text-decoration:none;font-size:14px;font-weight:600;
+  background:rgba(255,255,255,.04);
+  backdrop-filter:blur(8px);
+  transition:all .25s;
+}
+.btn-outline:hover{
+  background:rgba(255,255,255,.1);
+  border-color:rgba(255,255,255,.3);
+  color:#fff;
+}
+
+/* Floating burger */
+.hero-visual{
+  position:absolute;
+  left:6%;
+  top:50%;transform:translateY(-50%);
+  font-size:170px;
+  animation:float 4s ease-in-out infinite;
+  filter: drop-shadow(0 30px 60px rgba(212,175,55,.2));
+  z-index:0;
+  opacity:.85;
+}
+@keyframes float{
+  0%,100%{transform:translateY(-50%) rotate(-3deg)}
+  50%{transform:translateY(calc(-50% - 22px)) rotate(3deg)}
+}
+
+
+/* ── HERO INLINE STATS ── */
+.hero-stats{
+  display:flex;align-items:center;gap:0;
+  margin-top:28px;
+  background:rgba(255,255,255,.05);
+  backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:50px;
+  padding:10px 20px;
+  width:fit-content;
+}
+.hero-stat{
+  display:flex;flex-direction:column;align-items:center;
+  padding:0 18px;
+}
+.hero-stat-num{
+  font-size:17px;font-weight:900;color:var(--gold);
+  letter-spacing:-.5px;
+}
+.hero-stat-label{
+  font-size:10px;color:rgba(255,255,255,.45);margin-top:1px;
+}
+.hero-stat-divider{
+  width:1px;height:30px;
+  background:rgba(255,255,255,.1);
+}
+@media(max-width:480px){
+  .hero-stat{ padding:0 12px; }
+  .hero-stat-num{ font-size:15px; }
+}
+
+
+
+
+/* ── Btn variants ── */
+.btn-call{
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.15);
+  color:#fff !important;
+  display:flex;align-items:center;gap:7px;
+  box-shadow:none;
+}
+.btn-call:hover{background:rgba(255,255,255,.15);box-shadow:none;transform:translateY(-1px);}
+.btn-call span{font-size:13px;}
+.btn-order{order:1;}
+@media(max-width:900px){.btn-call span{display:none}}
+@media(max-width:768px){.btn-call{display:none}}
+
+/* ── Nav phone ── */
+.nav-phone{
+  color:rgba(255,255,255,.7);text-decoration:none;font-size:13px;
+  display:flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:50px;padding:7px 14px;
+  transition:all .25s;white-space:nowrap;
+}
+.nav-phone:hover{background:rgba(255,255,255,.12);color:#fff;}
+@media(max-width:900px){ .nav-phone span{display:none} }
+@media(max-width:768px){ .nav-phone{display:none} }
+
+/* ── Instagram icon hover ── */
+.insta-btn{
+  color:rgba(255,255,255,.6);
+  text-decoration:none;
+  font-size:18px;
+  display:flex;align-items:center;
+  transition:color .3s;
+  padding:4px;
+  border-radius:8px;
+}
+.insta-btn svg{ transition:stroke .3s, filter .3s; }
+.insta-btn:hover svg{
+  stroke:url(#instaGrad);
+  filter:drop-shadow(0 0 6px rgba(225,48,108,.6));
+}
+
+/* ── SECTION BASE ── */
+section{padding:90px 5%;position:relative;z-index:2}
+.section-label{
+  font-size:11px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:var(--gold);
+  margin-bottom:10px;opacity:.8;
+}
+.title{font-size:40px;font-weight:900;margin-bottom:8px;letter-spacing:-.5px}
+.sub{color:var(--text-muted);margin-bottom:40px;font-size:15px}
+
+/* ── GLASS CARD ── */
+.glass-card{
+  background:rgba(255,255,255,.05);
+  backdrop-filter:blur(24px) saturate(180%);
+  -webkit-backdrop-filter:blur(24px) saturate(180%);
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:20px;
+  overflow:hidden;
+  transition:transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+.glass-card:hover{
+  transform:translateY(-6px);
+  border-color:rgba(212,175,55,.3);
+  box-shadow:0 24px 60px rgba(0,0,0,.4), 0 0 0 1px rgba(212,175,55,.1);
+}
+
+/* ── MENU GRID ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.card img{
+  width:100%;height:210px;object-fit:cover;
+  transition:transform .6s cubic-bezier(.4,0,.2,1);
+}
+.card:hover img{transform:scale(1.08)}
+.card-img-wrap{
+  overflow:hidden;
+  position:relative;
+}
+.card-img-wrap::after{
+  content:'';
+  position:absolute;bottom:0;left:0;right:0;height:80px;
+  background:linear-gradient(to top, rgba(6,6,8,.9), transparent);
+  pointer-events:none;
+}
+.card-body{padding:20px}
+.card-body h3{font-size:16px;font-weight:700;margin-bottom:8px}
+.price{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(212,175,55,.12);
+  border:1px solid rgba(212,175,55,.25);
+  border-radius:50px;
+  padding:4px 12px;
+  color:var(--gold);font-weight:900;font-size:15px;
+  margin-top:8px;
+}
+.card-tag{
+  display:inline-block;padding:3px 10px;border-radius:20px;
+  background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.2);
+  color:var(--gold);font-size:11px;font-weight:700;
+  margin-bottom:10px;
+}
+
+
+
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:start}
+.about-text p{color:rgba(255,255,255,.6);line-height:2.1;font-size:15px}
+.features-box{
+  background:rgba(255,255,255,.04);
+  backdrop-filter:blur(24px);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:20px;padding:32px;
+}
+.features-box h3{color:var(--gold);font-size:18px;margin-bottom:20px}
+.feature-item{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06);
+  font-size:14px;color:rgba(255,255,255,.75);
+}
+.feature-item:last-child{border-bottom:none}
+.feature-icon{
+  width:32px;height:32px;border-radius:10px;
+  background:linear-gradient(135deg,rgba(212,175,55,.2),rgba(212,175,55,.05));
+  border:1px solid rgba(212,175,55,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;flex-shrink:0;
+}
+
+/* ── CONTACT ── */
+.contact-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:28px}
+.contact-info{
+  background:rgba(255,255,255,.04);
+  backdrop-filter:blur(24px);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:20px;padding:32px;
+}
+.contact-info h3{font-size:18px;margin-bottom:24px}
+.info-row{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06);
+  font-size:14px;color:rgba(255,255,255,.7);
+}
+.info-row:last-child{border-bottom:none}
+.info-icon{
+  width:38px;height:38px;border-radius:12px;
+  background:linear-gradient(135deg,rgba(212,175,55,.15),rgba(212,175,55,.05));
+  border:1px solid rgba(212,175,55,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;flex-shrink:0;
+}
+.contact-form{
+  background:rgba(255,255,255,.04);
+  backdrop-filter:blur(24px);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:20px;padding:32px;
+}
+.contact-form h3{font-size:18px;margin-bottom:24px}
+.form-group{margin-bottom:16px}
+.form-group label{font-size:12px;color:var(--text-muted);margin-bottom:6px;display:block}
+.form-group input,
+.form-group textarea{
+  width:100%;padding:13px 16px;
+  background:rgba(255,255,255,.06);
+  backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.1);
+  color:#fff;border-radius:12px;
+  font-family:Vazirmatn,sans-serif;
+  font-size:14px;
+  outline:none;
+  transition:border-color .25s, background .25s;
+}
+.form-group input:focus,
+.form-group textarea:focus{
+  border-color:rgba(212,175,55,.4);
+  background:rgba(255,255,255,.09);
+}
+.form-group textarea{height:100px;resize:none}
+.submit-btn{
+  width:100%;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  border:none;padding:14px;border-radius:50px;
+  color:#111;font-weight:800;font-size:15px;
+  cursor:pointer;font-family:Vazirmatn,sans-serif;
+  transition:transform .2s, box-shadow .2s;
+  box-shadow:0 4px 20px rgba(212,175,55,.3);
+  margin-top:6px;
+}
+.submit-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(212,175,55,.45)}
+
+/* ── MAP PLACEHOLDER ── */
+.map-box{
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:16px;height:120px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;color:var(--text-muted);
+  margin-top:16px;
+  overflow:hidden;
+}
+
+/* ── DIVIDER ── */
+.divider{
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);
+  margin:0 5%;
+}
+
+/* ── FOOTER ── */
+footer{
+  padding:36px 5%;
+  display:flex;justify-content:space-between;align-items:center;
+  position:relative;z-index:2;
+}
+.footer-left{color:rgba(255,255,255,.35);font-size:13px}
+.footer-right{font-size:13px;color:rgba(255,255,255,.35)}
+.footer-right a{
+  color:var(--gold);text-decoration:none;font-weight:600;
+  transition:opacity .2s;
+}
+.footer-right a:hover{opacity:.7}
+
+/* ── SCROLL REVEAL ── */
+.reveal{
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity .7s ease, transform .7s ease;
+}
+.reveal.visible{
+  opacity:1;transform:translateY(0);
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .about-grid,.contact-grid{grid-template-columns:1fr}
+  .stats-row{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  h1{font-size:44px}
+  .menu{display:none}
+  .hero-visual{display:none}
+  .stats-row{grid-template-columns:1fr 1fr}
+  footer{flex-direction:column;gap:10px;text-align:center}
+}
+@media(max-width:480px){
+  h1{font-size:36px}
+  .stats-row{grid-template-columns:1fr}
+}
+
+/* ── Bottom Tab Bar (mobile only) ── */
+.bottom-tab-bar{
+  display:none;
+  position:fixed;bottom:0;left:0;right:0;
+  height:68px;
+  background:rgba(6,6,8,.75);
+  backdrop-filter:blur(32px) saturate(180%);
+  -webkit-backdrop-filter:blur(32px) saturate(180%);
+  border-top:1px solid rgba(255,255,255,.1);
+  z-index:1001;
+  padding:0 8px;
+  padding-bottom:env(safe-area-inset-bottom, 0px);
+}
+.tab-items{
+  display:flex;justify-content:space-around;align-items:center;
+  height:100%;
+}
+.tab-item{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:3px;text-decoration:none;color:rgba(255,255,255,.45);
+  flex:1;height:100%;
+  font-size:10px;font-weight:600;
+  transition:color .2s;
+  -webkit-tap-highlight-color:transparent;
+  cursor:pointer;border:none;background:none;font-family:Vazirmatn,sans-serif;
+}
+.tab-item .tab-icon{ font-size:20px;line-height:1; }
+.tab-item.active,.tab-item:hover{ color:var(--gold); }
+@media(max-width:768px){
+  .bottom-tab-bar{display:block}
+  /* give body padding so content isn't hidden under tab bar */
+  body{ padding-bottom:68px; }
+  .menu{display:none}
+}
+
+/* ══════════════════════════════════
+   CART & ORDER SYSTEM
+══════════════════════════════════ */
+
+/* Cart FAB */
+.cart-fab{
+  position:fixed;bottom:90px;left:20px;
+  width:56px;height:56px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;cursor:pointer;z-index:900;
+  box-shadow:0 8px 30px rgba(212,175,55,.45);
+  border:none;
+  transition:transform .25s, box-shadow .25s;
+}
+.cart-fab:hover{transform:scale(1.1);box-shadow:0 12px 40px rgba(212,175,55,.6);}
+.cart-badge{
+  position:absolute;top:-4px;right:-4px;
+  width:20px;height:20px;border-radius:50%;
+  background:#ef4444;color:#fff;
+  font-size:11px;font-weight:900;
+  display:flex;align-items:center;justify-content:center;
+  border:2px solid var(--bg);
+  opacity:0;transform:scale(0);
+  transition:opacity .2s, transform .2s;
+}
+.cart-badge.show{opacity:1;transform:scale(1);}
+
+/* Cart Drawer */
+.cart-drawer{
+  position:fixed;left:0;top:0;bottom:0;
+  width:min(380px, 100vw);
+  background:rgba(8,8,12,.97);
+  backdrop-filter:blur(40px) saturate(180%);
+  border-right:1px solid rgba(255,255,255,.1);
+  z-index:1100;
+  transform:translateX(-100%);
+  transition:transform .35s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;
+  overflow:hidden;
+}
+.cart-drawer.open{transform:translateX(0);}
+.cart-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.6);
+  backdrop-filter:blur(4px);
+  z-index:1099;opacity:0;pointer-events:none;
+  transition:opacity .35s;
+}
+.cart-overlay.open{opacity:1;pointer-events:all;}
+
+.cart-header{
+  padding:24px 20px 16px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  display:flex;justify-content:space-between;align-items:center;
+  flex-shrink:0;
+}
+.cart-header h3{font-size:18px;font-weight:800;}
+.cart-close{
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(255,255,255,.08);border:none;color:#fff;
+  font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+}
+.cart-items{flex:1;overflow-y:auto;padding:16px 20px;}
+.cart-empty{
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;height:200px;gap:12px;
+  color:rgba(255,255,255,.3);
+}
+.cart-empty .big-emoji{font-size:48px;}
+.cart-item{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06);
+}
+.cart-item-name{flex:1;font-size:14px;font-weight:600;}
+.cart-item-price{font-size:13px;color:var(--gold);font-weight:700;white-space:nowrap;}
+.qty-ctrl{display:flex;align-items:center;gap:6px;}
+.qty-btn{
+  width:26px;height:26px;border-radius:8px;
+  background:rgba(255,255,255,.1);border:none;color:#fff;
+  font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:background .2s;
+}
+.qty-btn:hover{background:rgba(212,175,55,.3);}
+.qty-num{font-size:14px;font-weight:700;min-width:18px;text-align:center;}
+
+.cart-footer{
+  padding:16px 20px 24px;
+  border-top:1px solid rgba(255,255,255,.08);
+  flex-shrink:0;
+}
+.cart-total{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:16px;
+}
+.cart-total-label{color:rgba(255,255,255,.5);font-size:14px;}
+.cart-total-val{font-size:22px;font-weight:900;color:var(--gold);}
+
+/* Order form inside cart */
+.order-form{display:none;}
+.order-form.show{display:block;}
+.order-form input{
+  width:100%;padding:11px 14px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:10px;color:#fff;
+  font-family:Vazirmatn,sans-serif;font-size:14px;
+  outline:none;margin-bottom:10px;
+  transition:border-color .2s;
+}
+.order-form input:focus{border-color:rgba(212,175,55,.5);}
+.order-note{
+  font-size:12px;color:rgba(255,255,255,.35);
+  margin-bottom:12px;line-height:1.8;
+}
+
+/* Add to cart btn on cards */
+.add-to-cart{
+  margin-top:12px;width:100%;
+  padding:9px;border-radius:50px;
+  background:rgba(212,175,55,.12);
+  border:1px solid rgba(212,175,55,.3);
+  color:var(--gold);font-family:Vazirmatn,sans-serif;
+  font-size:13px;font-weight:700;cursor:pointer;
+  transition:all .2s;
+}
+.add-to-cart:hover{background:rgba(212,175,55,.25);transform:translateY(-1px);}
+.add-to-cart:active{transform:scale(.97);}
+
+/* Success toast */
+.toast{
+  position:fixed;bottom:100px;right:20px;
+  background:rgba(34,197,94,.15);
+  border:1px solid rgba(34,197,94,.3);
+  backdrop-filter:blur(16px);
+  color:#4ade80;padding:10px 18px;border-radius:50px;
+  font-size:13px;font-weight:700;
+  z-index:1200;opacity:0;transform:translateY(10px);
+  transition:opacity .3s, transform .3s;
+  pointer-events:none;
+}
+.toast.show{opacity:1;transform:translateY(0);}
+
+/* Supabase status indicator */
+.db-status{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11px;color:rgba(255,255,255,.3);
+  margin-bottom:12px;
+}
+.db-dot{width:6px;height:6px;border-radius:50%;background:#6b7280;}
+.db-dot.connected{background:#4ade80;}
+
+/* Cloudinary image wrapper */
+.card-img-wrap{position:relative;overflow:hidden;}
+.img-placeholder{
+  width:100%;height:200px;
+  background:linear-gradient(135deg,rgba(212,175,55,.08),rgba(255,255,255,.03));
+  display:flex;align-items:center;justify-content:center;
+  font-size:48px;
+}
+
+@media(max-width:768px){
+  .cart-fab{bottom:80px;}
+}
+</style>
+  <!-- Performance hints -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  
+  <link rel="dns-prefetch" href="https://tile.openstreetmap.org">
+  <meta name="theme-color" content="#060608">
+</head>
+<body>
+
+<!-- Bottom tab bar injected via CSS/JS below -->
+
+<!-- NAVBAR -->
+
+<!-- Decorative orbs -->
+<div class="orb" style="width:500px;height:500px;background:radial-gradient(circle,rgba(212,175,55,1),transparent);top:-100px;right:-100px;animation-duration:14s;"></div>
+<div class="orb" style="width:400px;height:400px;background:radial-gradient(circle,rgba(180,80,20,1),transparent);bottom:-80px;left:-80px;animation-duration:18s;animation-delay:3s;"></div>
+<div class="orb" style="width:250px;height:250px;background:radial-gradient(circle,rgba(212,175,55,.8),transparent);top:60%;right:5%;animation-duration:10s;animation-delay:6s;"></div>
+<nav id="navbar">
+  <div class="logo">
+    <div class="logo-icon">🍔</div>
+    عمو رسول
+  </div>
+  <div class="menu">
+    <a href="#home">خانه</a>
+    <a href="#menu">منو</a>
+    <a href="#about">درباره ما</a>
+    <a href="#contact">تماس</a>
+  </div>
+  <div style="display:flex;gap:10px;align-items:center;justify-content:flex-end;">
+    <a href="https://www.instagram.com/rasul_amuu?igsh=Zmh5Z3dtYWpyZWN3" target="_blank" class="insta-btn" title="اینستاگرام">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <defs>
+        <linearGradient id="instaGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#f09433"/>
+          <stop offset="25%" stop-color="#e6683c"/>
+          <stop offset="50%" stop-color="#dc2743"/>
+          <stop offset="75%" stop-color="#cc2366"/>
+          <stop offset="100%" stop-color="#bc1888"/>
+        </linearGradient>
+      </defs>
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+    </svg>
+    </a>
+    <a href="tel:09031908069" class="btn btn-call" title="تماس">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.24h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 16.92z"/></svg>
+      <span>۰۹۰۳۱۹۰۸۰۶۹</span>
+    </a>
+    <a class="btn btn-order" href="#menu">سفارش آنلاین</a>
+
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="badge" id="statusBadge">
+      <span class="badge-dot"></span>
+      <span id="statusText">در حال بررسی...</span>
+    </div>
+    <h1>طعم اصیل<br><span class="gold">عمو رسول</span></h1>
+    <p class="hero-sub">فست فود مدرن با مواد اولیه تازه و کیفیت بی‌نظیر در قلب ارومیه. هر لقمه یک تجربه متفاوت.</p>
+    <div class="hero-btns">
+      <a href="#menu" class="btn">مشاهده منو</a>
+      <a href="#contact" class="btn-outline">تماس با ما</a>
+    </div>
+    <!-- Inline micro stats -->
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-num">+۵K</span>
+        <span class="hero-stat-label">مشتری راضی</span>
+      </div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">۱۵+</span>
+        <span class="hero-stat-label">آیتم منو</span>
+      </div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">⭐ ۵</span>
+        <span class="hero-stat-label">امتیاز</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual">🍔</div>
+
+  <!-- Rich visual panel (right side) -->
+  <div class="hero-visual-panel">
+    <div class="hero-img-ring"></div>
+    <div class="hero-img-ring"></div>
+    <div class="hero-img-ring"></div>
+    <img
+      class="hero-main-img"
+      src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Crect width='600' height='600' rx='300' fill='%23d4af37' opacity='0.15'/%3E%3Ctext x='50%25' y='55%25' font-size='220' text-anchor='middle' dominant-baseline='middle'%3E🍔%3C/text%3E%3C/svg%3E"
+      alt="برگر عمو رسول"
+      loading="eager"
+    >
+    <!-- floating info badges -->
+    <div class="food-badge">
+      <span class="fb-icon">🔥</span>
+      <span class="fb-text">
+        <span class="fb-title">تازه‌پز</span>
+        <span class="fb-sub">هر روز</span>
+      </span>
+    </div>
+    <div class="food-badge">
+      <span class="fb-icon">⭐</span>
+      <span class="fb-text">
+        <span class="fb-title">امتیاز ۵ از ۵</span>
+        <span class="fb-sub">+۵۰۰۰ مشتری</span>
+      </span>
+    </div>
+    <div class="food-badge">
+      <span class="fb-icon">🚀</span>
+      <span class="fb-text">
+        <span class="fb-title">تحویل سریع</span>
+        <span class="fb-sub">ارومیه</span>
+      </span>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- MENU -->
+<section id="menu">
+  <div class="section-label reveal">بهترین‌های ما</div>
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:0;">
+    <div>
+      <div class="title reveal" style="margin-bottom:8px;">منوی محبوب 🍔</div>
+      <div class="sub reveal" style="margin-bottom:0;">آیتم‌های پیشنهادی عمو رسول — همه تازه‌پز</div>
+    </div>
+    <a href="#contact" class="btn reveal" style="margin-bottom:40px;">سفارش تلفنی ☎</a>
+  </div>
+  <div class="grid">
+    <div class="glass-card card reveal">
+      <div class="card-img-wrap">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200'%3E%3Crect width='400' height='200' fill='%23d4af37' opacity='0.12'/%3E%3Ctext x='50%25' y='52%25' font-size='90' text-anchor='middle' dominant-baseline='middle'%3E🍔%3C/text%3E%3C/svg%3E" loading="lazy" alt="کلاسیک برگر">
+      </div>
+      <div class="card-body">
+        <div class="card-tag">پرفروش‌ترین</div>
+        <h3>کلاسیک برگر</h3>
+        <div class="price">180T</div>
+        <button class="add-to-cart" data-item-id="1">+ افزودن به سبد</button>
+      </div>
+    </div>
+    <div class="glass-card card reveal">
+      <div class="card-img-wrap">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200'%3E%3Crect width='400' height='200' fill='%23c9a227' opacity='0.12'/%3E%3Ctext x='50%25' y='52%25' font-size='90' text-anchor='middle' dominant-baseline='middle'%3E🍔%3C/text%3E%3C/svg%3E" loading="lazy" alt="برگر عمو رسول">
+      </div>
+      <div class="card-body">
+        <div class="card-tag">ویژه عمو</div>
+        <h3>برگر عمو رسول</h3>
+        <div class="price">220T</div>
+        <button class="add-to-cart" data-item-id="2">+ افزودن به سبد</button>
+      </div>
+    </div>
+    <div class="glass-card card reveal">
+      <div class="card-img-wrap">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200'%3E%3Crect width='400' height='200' fill='%23e6b800' opacity='0.12'/%3E%3Ctext x='50%25' y='52%25' font-size='90' text-anchor='middle' dominant-baseline='middle'%3E🧀%3C/text%3E%3C/svg%3E" loading="lazy" alt="چیز برگر">
+      </div>
+      <div class="card-body">
+        <div class="card-tag">محبوب</div>
+        <h3>چیز برگر</h3>
+        <div class="price">200T</div>
+        <button class="add-to-cart" data-item-id="3">+ افزودن به سبد</button>
+      </div>
+    </div>
+    <div class="glass-card card reveal">
+      <div class="card-img-wrap">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200'%3E%3Crect width='400' height='200' fill='%23d4950a' opacity='0.12'/%3E%3Ctext x='50%25' y='52%25' font-size='90' text-anchor='middle' dominant-baseline='middle'%3E🧀%3C/text%3E%3C/svg%3E" loading="lazy" alt="دوبل چیز برگر">
+      </div>
+      <div class="card-body">
+        <div class="card-tag">سنگین!</div>
+        <h3>دوبل چیز برگر</h3>
+        <div class="price">260T</div>
+        <button class="add-to-cart" data-item-id="4">+ افزودن به سبد</button>
+      </div>
+    </div>
+    <div class="glass-card card reveal">
+      <div class="card-img-wrap">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200'%3E%3Crect width='400' height='200' fill='%23c0392b' opacity='0.12'/%3E%3Ctext x='50%25' y='52%25' font-size='90' text-anchor='middle' dominant-baseline='middle'%3E🌭%3C/text%3E%3C/svg%3E" loading="lazy" alt="هات داگ">
+      </div>
+      <div class="card-body">
+        <div class="card-tag">تازه</div>
+        <h3>هات داگ</h3>
+        <div class="price">130T</div>
+        <button class="add-to-cart" data-item-id="5">+ افزودن به سبد</button>
+      </div>
+    </div>
+    <div class="glass-card card reveal">
+      <div class="card-img-wrap">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200'%3E%3Crect width='400' height='200' fill='%23e74c3c' opacity='0.12'/%3E%3Ctext x='50%25' y='52%25' font-size='90' text-anchor='middle' dominant-baseline='middle'%3E🌭%3C/text%3E%3C/svg%3E" loading="lazy" alt="هات داگ پنیر">
+      </div>
+      <div class="card-body">
+        <div class="card-tag">خاص</div>
+        <h3>هات داگ پنیر</h3>
+        <div class="price">150T</div>
+        <button class="add-to-cart" data-item-id="6">+ افزودن به سبد</button>
+      </div>
+    </div>
+    <div class="glass-card card reveal">
+      <div class="card-img-wrap">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200'%3E%3Crect width='400' height='200' fill='%23d4af37' opacity='0.12'/%3E%3Ctext x='50%25' y='52%25' font-size='90' text-anchor='middle' dominant-baseline='middle'%3E👑%3C/text%3E%3C/svg%3E" loading="lazy" alt="رویال برگر">
+      </div>
+      <div class="card-body">
+        <div class="card-tag">پیشنهاد ویژه</div>
+        <h3>رویال برگر</h3>
+        <div class="price">280T</div>
+        <button class="add-to-cart" data-item-id="7">+ افزودن به سبد</button>
+      </div>
+    </div>
+    <div class="glass-card card reveal">
+      <div class="card-img-wrap">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200'%3E%3Crect width='400' height='200' fill='%23f39c12' opacity='0.12'/%3E%3Ctext x='50%25' y='52%25' font-size='90' text-anchor='middle' dominant-baseline='middle'%3E🍟%3C/text%3E%3C/svg%3E" loading="lazy" alt="سیب عمو">
+      </div>
+      <div class="card-body">
+        <div class="card-tag">همراه غذا</div>
+        <h3>سیب عمو</h3>
+        <div class="price">80T</div>
+        <button class="add-to-cart" data-item-id="8">+ افزودن به سبد</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label reveal">داستان ما</div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <div class="title">درباره ما</div>
+      <div class="sub">از ارومیه با عشق</div>
+      <p>عمو رسول با هدف ارائه فست فود با کیفیت، محیط حرفه‌ای و طعمی ماندگار فعالیت می‌کند. ما باور داریم که هر وعده غذایی باید یک تجربه خاص و به‌یادماندنی باشد.</p>
+      <br>
+      <p>با سال‌ها تجربه در صنعت غذا، تیم ما متعهد است تا بهترین مواد اولیه را انتخاب کند و با عشق آن را برای شما آماده کند.</p>
+    </div>
+    <div class="features-box reveal">
+      <h3>چرا عمو رسول؟</h3>
+      <div class="feature-item"><div class="feature-icon">🥩</div>مواد اولیه تازه و با کیفیت</div>
+      <div class="feature-item"><div class="feature-icon">🔥</div>پخت روزانه و تازه</div>
+      <div class="feature-item"><div class="feature-icon">🚀</div>تحویل سریع و به موقع</div>
+      <div class="feature-item"><div class="feature-icon">✨</div>محیط تمیز و حرفه‌ای</div>
+      <div class="feature-item"><div class="feature-icon">❤️</div>با عشق برای ارومیه</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label reveal">ارتباط با ما</div>
+  <div class="title reveal">تماس با ما</div>
+  <div class="sub reveal">همیشه در دسترسیم</div>
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <h3>اطلاعات تماس</h3>
+      <div class="info-row"><div class="info-icon">📍</div>ارومیه – پل قوین</div>
+      <div class="info-row"><div class="info-icon">📞</div><a href="tel:09031908069" style="color:inherit;text-decoration:none;">۰۹۰۳۱۹۰۸۰۶۹</a></div>
+      <div class="info-row"><div class="info-icon">🕐</div>۱۲ ظهر تا ۱۲ شب</div>
+      <div class="info-row"><div class="info-icon">📱</div><a href="https://www.instagram.com/rasul_amuu?igsh=Zmh5Z3dtYWpyZWN3" target="_blank" style="color:var(--gold);text-decoration:none;">@amo.rasoul</a></div>
+      <div class="map-box" style="height:210px;padding:0;overflow:hidden;border-radius:16px;position:relative;background:#1a1f2e;">
+        <!-- Static OSM tiles - no filtering issues -->
+        <canvas id="mapCanvas" width="600" height="210" style="width:100%;height:100%;border-radius:16px;cursor:pointer;" onclick="window.open('https://balad.ir/?center=37.522537,45.034621&zoom=16','_blank')"></canvas>
+        <div id="mapOverlay" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;pointer-events:none;">
+          <div style="font-size:32px;">📍</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.8);font-weight:700;">عمو رسول — ارومیه، پل قوین</div>
+        </div>
+        <!-- App buttons -->
+        <div style="position:absolute;bottom:10px;left:10px;display:flex;gap:8px;">
+          <a href="https://balad.ir/?center=37.522537,45.034621&zoom=16" target="_blank"
+             style="background:rgba(0,0,0,.75);backdrop-filter:blur(10px);color:#fff;text-decoration:none;padding:6px 12px;border-radius:20px;font-size:11px;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;gap:4px;">
+            🗺 بلد
+          </a>
+          <a href="https://neshan.org/maps/places?lat=37.522537&lng=45.034621" target="_blank"
+             style="background:rgba(0,0,0,.75);backdrop-filter:blur(10px);color:#fff;text-decoration:none;padding:6px 12px;border-radius:20px;font-size:11px;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;gap:4px;">
+            📍 نشان
+          </a>
+        </div>
+      </div>
+      <script>
+      (function(){
+        // Draw OSM static map tiles on canvas
+        const canvas = document.getElementById('mapCanvas');
+        if(!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const lat = 37.522537, lng = 45.034621, zoom = 16;
+        const W = canvas.width, H = canvas.height;
+        const TILE = 256;
+
+        function lon2tile(lon,z){ return Math.floor((lon+180)/360 * Math.pow(2,z)); }
+        function lat2tile(lat,z){ return Math.floor((1-Math.log(Math.tan(lat*Math.PI/180)+1/Math.cos(lat*Math.PI/180))/Math.PI)/2 * Math.pow(2,z)); }
+
+        const cx = lon2tile(lng, zoom), cy = lat2tile(lat, zoom);
+        const cols = Math.ceil(W/TILE)+2, rows = Math.ceil(H/TILE)+2;
+
+        // fractional offset for centering
+        const frac_x = (lng+180)/360 * Math.pow(2,zoom) - cx;
+        const frac_y = (1-Math.log(Math.tan(lat*Math.PI/180)+1/Math.cos(lat*Math.PI/180))/Math.PI)/2 * Math.pow(2,zoom) - cy;
+        const ox = Math.round(W/2 - frac_x*TILE);
+        const oy = Math.round(H/2 - frac_y*TILE);
+
+        ctx.fillStyle='#2a2f3e'; ctx.fillRect(0,0,W,H);
+
+        let loaded = 0, total = cols*rows;
+        for(let dx=0;dx<cols;dx++){
+          for(let dy=0;dy<rows;dy++){
+            const tx=cx+dx-Math.floor(cols/2), ty=cy+dy-Math.floor(rows/2);
+            const px=ox+(dx-Math.floor(cols/2))*TILE, py=oy+(dy-Math.floor(rows/2))*TILE;
+            const img=new Image(); img.crossOrigin='anonymous';
+            // Use OSM tile servers (no API key, no filtering)
+            img.src=`https://tile.openstreetmap.org/${zoom}/${tx}/${ty}.png`;
+            img.onload=function(){
+              ctx.drawImage(img,px,py,TILE,TILE);
+              loaded++;
+              if(loaded===total) drawPin();
+            };
+            img.onerror=function(){
+              loaded++;
+              if(loaded===total) drawPin();
+            };
+          }
+        }
+
+        function drawPin(){
+          const overlay = document.getElementById('mapOverlay');
+          if(overlay) overlay.style.display='none';
+          // Draw marker
+          ctx.beginPath();
+          ctx.arc(W/2, H/2-4, 14, 0, Math.PI*2);
+          ctx.fillStyle='#d4af37';
+          ctx.shadowColor='rgba(212,175,55,.6)';
+          ctx.shadowBlur=20;
+          ctx.fill();
+          ctx.shadowBlur=0;
+          ctx.fillStyle='#111';
+          ctx.font='bold 14px sans-serif';
+          ctx.textAlign='center';
+          ctx.textBaseline='middle';
+          ctx.fillText('🍔', W/2, H/2-4);
+          // Label
+          ctx.fillStyle='rgba(0,0,0,.75)';
+          ctx.roundRect?ctx.roundRect(W/2-55,H/2+14,110,22,6):0;
+          ctx.fill();
+          ctx.fillStyle='#fff';
+          ctx.font='bold 11px Vazirmatn,sans-serif';
+          ctx.fillText('عمو رسول', W/2, H/2+25);
+        }
+        // Show fallback overlay immediately while loading
+        setTimeout(()=>{ if(!loaded) drawPin(); }, 5000);
+      })();
+      </script>
+    </div>
+    <div class="contact-form reveal">
+      <h3>پیام بفرستید</h3>
+      <div class="form-group">
+        <label>نام شما</label>
+        <input type="text" placeholder="مثلاً: علی محمدی">
+      </div>
+      <div class="form-group">
+        <label>شماره تماس</label>
+        <input type="tel" placeholder="۰۹۱۲۰۰۰۰۰۰۰">
+      </div>
+      <div class="form-group">
+        <label>پیام شما</label>
+        <textarea placeholder="سفارش، پیشنهاد یا انتقاد..."></textarea>
+      </div>
+      <button class="submit-btn">ارسال پیام ✉️</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="divider"></div>
+<footer>
+  <div class="footer-left">© ۱۴۰۳ عمو رسول — تمام حقوق محفوظ است</div>
+  <div class="footer-right">طراحی و توسعه توسط <a href="https://arhanhatami.ir" target="_blank">Arhan Hatami</a></div>
+</footer>
+
+<script>
+/* ── Smooth scroll for all anchor links ── */
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    const target = document.querySelector(link.getAttribute('href'));
+    if(target){
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+/* ── Navbar scroll effect ── */
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+/* ── Mobile nav ── */
+
+
+/* ── Open / Closed status badge ── */
+(function(){
+  const OPEN_HOUR = 12;  // 12:00 ظهر
+  const CLOSE_HOUR = 24; // 00:00 شب (نیمه‌شب)
+
+  const badge = document.getElementById('statusBadge');
+  const text  = document.getElementById('statusText');
+
+  function getCountdownData(){
+    const now = new Date();
+    const totalSecs = now.getHours()*3600 + now.getMinutes()*60 + now.getSeconds();
+    const openSecs = OPEN_HOUR * 3600;
+    // seconds remaining until next open (always calculate from now to next OPEN_HOUR)
+    let diff = openSecs - totalSecs;
+    if(diff <= 0) diff += 86400; // wrap to next day
+    const hh = Math.floor(diff / 3600);
+    const mm = Math.floor((diff % 3600) / 60);
+    const ss = diff % 60;
+    return { hh, mm, ss, diff };
+  }
+
+  function getCountdownMsg(hh, mm){
+    if(hh >= 5) return { msg: 'فردا منتظرتیم 🌙', sub: null };
+    if(hh >= 2) return { msg: 'چند ساعت دیگه بازیم! 🔥', sub: null };
+    if(hh >= 1) return { msg: 'داریم آماده می‌شیم! 🍔', sub: null };
+    if(mm >= 30) return { msg: 'تا نیم ساعت دیگه! ⚡', sub: null };
+    if(mm >= 10) return { msg: 'نزدیکه! داغ داغ میاد 🔥', sub: null };
+    return { msg: 'الان الان! 🎉', sub: null };
+  }
+
+  // Inject countdown element next to badge
+  const countdownEl = document.createElement('div');
+  countdownEl.id = 'countdownWrap';
+  countdownEl.style.cssText = 'display:none;flex-direction:row-reverse;align-items:center;gap:10px;margin-top:12px;';
+  countdownEl.innerHTML = '<span style="font-size:12px;color:rgba(255,255,255,.5);margin-left:8px;">باز می‌شیم در:</span><span id="countdownTimer" style="font-size:22px;font-weight:900;color:#f87171;font-variant-numeric:tabular-nums;letter-spacing:2px;"></span>';
+  document.getElementById('statusBadge').insertAdjacentElement('afterend', countdownEl);
+
+  function checkStatus(){
+    const now = new Date();
+    const h = now.getHours();
+    const isOpen = h >= OPEN_HOUR && h < CLOSE_HOUR;
+
+    badge.className = 'badge ' + (isOpen ? 'open' : 'closed');
+    text.textContent = isOpen ? 'اکنون باز هستیم' : 'فردا منتظرتیم 🌙';
+    
+    const wrap = document.getElementById('countdownWrap');
+    const timer = document.getElementById('countdownTimer');
+    if(!isOpen){
+      const {hh, mm, ss} = getCountdownData();
+      const {msg} = getCountdownMsg(hh, mm);
+      text.textContent = msg;
+      wrap.style.display = 'flex';
+      timer.textContent = String(hh).padStart(2,'0')+':'+String(mm).padStart(2,'0')+':'+String(ss).padStart(2,'0');
+    } else {
+      wrap.style.display = 'none';
+    }
+  }
+
+  checkStatus();
+  setInterval(checkStatus, 1000); // هر ثانیه آپدیت
+})();
+
+/* ── Scroll reveal ── */
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      // stagger siblings
+      const siblings = e.target.parentElement.querySelectorAll('.reveal');
+      siblings.forEach((s, i) => {
+        setTimeout(() => s.classList.add('visible'), i * 80);
+      });
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => observer.observe(el));
+</script>
+
+<!-- Bottom Tab Bar -->
+<div class="bottom-tab-bar">
+  <div class="tab-items">
+    <a href="#home" class="tab-item active" id="tab-home">
+      <span class="tab-icon">🏠</span>
+      <span>خانه</span>
+    </a>
+    <a href="#menu" class="tab-item" id="tab-menu">
+      <span class="tab-icon">🍔</span>
+      <span>منو</span>
+    </a>
+    <a href="#about" class="tab-item" id="tab-about">
+      <span class="tab-icon">📍</span>
+      <span>آدرس</span>
+    </a>
+    <a href="#contact" class="tab-item" id="tab-contact">
+      <span class="tab-icon">☎️</span>
+      <span>تماس</span>
+    </a>
+  </div>
+</div>
+
+<script>
+/* ── Bottom tab bar active state on scroll ── */
+(function(){
+  const sections = ['home','menu','about','contact'];
+  const tabs = sections.map(id => document.getElementById('tab-'+id));
+  function updateTabs(){
+    let current = 'home';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if(el && window.scrollY >= el.offsetTop - 120) current = id;
+    });
+    tabs.forEach(t => t && t.classList.remove('active'));
+    const activeTab = document.getElementById('tab-'+current);
+    if(activeTab) activeTab.classList.add('active');
+  }
+  window.addEventListener('scroll', updateTabs, {passive:true});
+})();
+</script>
+
+<!-- Cart overlay -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+<!-- Cart Drawer -->
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <h3>🛒 سبد سفارش</h3>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty" id="cartEmpty">
+      <span class="big-emoji">🛒</span>
+      <span>سبد خالیه!</span>
+    </div>
+  </div>
+  <div class="cart-footer">
+    <div class="db-status"><span class="db-dot" id="dbDot"></span><span id="dbStatusText">بررسی اتصال...</span></div>
+    <div class="cart-total">
+      <span class="cart-total-label">جمع کل:</span>
+      <span class="cart-total-val" id="cartTotal">۰ T</span>
+    </div>
+    <div class="order-form" id="orderForm">
+      <input type="text" id="orderName" placeholder="نام شما *" required>
+      <input type="tel" id="orderPhone" placeholder="شماره تماس *" required>
+      <input type="text" id="orderAddress" placeholder="آدرس تحویل (اختیاری)">
+      <p class="order-note">⚡ سفارش شما ثبت و با شما تماس گرفته می‌شه</p>
+      <button class="submit-btn" onclick="submitOrder()" id="submitBtn">ثبت سفارش 🚀</button>
+    </div>
+    <button class="submit-btn" id="checkoutBtn" onclick="showOrderForm()" style="display:none;">
+      ادامه و ثبت اطلاعات →
+    </button>
+  </div>
+</div>
+
+<!-- Cart FAB -->
+<button class="cart-fab" onclick="toggleCart()" aria-label="سبد سفارش">
+  🛒
+  <span class="cart-badge" id="cartBadge">0</span>
+</button>
+
+<!-- Toast notification -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ══════════════════════════════════
+   SUPABASE CONFIG
+   → برو supabase.com → New Project
+   → Settings > API → URL و anon key رو کپی کن
+══════════════════════════════════ */
+const SUPABASE_URL = 'https://bqpgdvwfvnevoagzdvai.supabase.co'; // ← آدرس پروژه از Settings > API
+const SUPABASE_KEY = 'sb_publishable_4Rvuz7Fgzib_guZKnPplAA_uSpIGAYv';
+const DEMO_MODE = false; // true تا وقتی Supabase وصل نشده
+
+/* ── Supabase connectivity check ── */
+async function checkSupabase(){
+  const dot = document.getElementById('dbDot');
+  const txt = document.getElementById('dbStatusText');
+  if(DEMO_MODE){
+    dot.className='db-dot'; 
+    txt.textContent='حالت دمو — Supabase وصل نشده';
+    return false;
+  }
+  try{
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/orders?select=id&limit=1`,{
+      headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY}
+    });
+    if(r.ok){ dot.className='db-dot connected'; txt.textContent='سرور متصله ✓'; return true; }
+  }catch(e){}
+  dot.className='db-dot'; txt.textContent='خطا در اتصال';
+  return false;
+}
+checkSupabase();
+
+/* ── Menu data (از اینجا قیمت و اسم ویرایش کن) ── */
+const MENU = [
+  {id:1, name:'کلاسیک برگر',    price:180, emoji:'🍔'},
+  {id:2, name:'برگر عمو رسول', price:220, emoji:'🍔'},
+  {id:3, name:'چیز برگر',       price:200, emoji:'🧀'},
+  {id:4, name:'دوبل چیز برگر', price:260, emoji:'🧀'},
+  {id:5, name:'هات داگ',        price:130, emoji:'🌭'},
+  {id:6, name:'هات داگ پنیر',  price:150, emoji:'🌭'},
+  {id:7, name:'رویال برگر',     price:280, emoji:'👑'},
+  {id:8, name:'سیب عمو',        price:80,  emoji:'🍟'},
+];
+
+/* ── Cart state ── */
+let cart = {};
+
+function addToCart(id){
+  cart[id] = (cart[id]||0) + 1;
+  updateCartUI();
+  showToast('✓ به سبد اضافه شد');
+}
+function removeFromCart(id){
+  if(!cart[id]) return;
+  cart[id]--;
+  if(cart[id]<=0) delete cart[id];
+  updateCartUI();
+}
+function getTotal(){ return Object.entries(cart).reduce((s,[id,q])=>{ const item=MENU.find(m=>m.id==id); return s+(item?item.price*q:0); },0); }
+function getCount(){ return Object.values(cart).reduce((s,q)=>s+q,0); }
+
+function updateCartUI(){
+  const count = getCount();
+  const badge = document.getElementById('cartBadge');
+  badge.textContent = count;
+  badge.classList.toggle('show', count>0);
+  document.getElementById('cartTotal').textContent = getTotal().toLocaleString('fa') + ' T';
+
+  const empty = document.getElementById('cartEmpty');
+  const checkoutBtn = document.getElementById('checkoutBtn');
+  empty.style.display = count ? 'none' : 'flex';
+  checkoutBtn.style.display = count ? 'block' : 'none';
+
+  // Render cart items
+  const container = document.getElementById('cartItems');
+  const existingItems = container.querySelectorAll('.cart-item');
+  existingItems.forEach(e=>e.remove());
+
+  Object.entries(cart).forEach(([id,qty])=>{
+    const item = MENU.find(m=>m.id==id);
+    if(!item) return;
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+    div.innerHTML = `
+      <span style="font-size:22px">${item.emoji}</span>
+      <span class="cart-item-name">${item.name}</span>
+      <div class="qty-ctrl">
+        <button class="qty-btn" onclick="removeFromCart(${id})">−</button>
+        <span class="qty-num">${qty}</span>
+        <button class="qty-btn" onclick="addToCart(${id})">+</button>
+      </div>
+      <span class="cart-item-price">${(item.price*qty).toLocaleString('fa')}T</span>
+    `;
+    container.appendChild(div);
+  });
+}
+
+/* ── Cart drawer ── */
+function toggleCart(){ 
+  const d=document.getElementById('cartDrawer');
+  d.classList.contains('open') ? closeCart() : openCart();
+}
+function openCart(){
+  document.getElementById('cartDrawer').classList.add('open');
+  document.getElementById('cartOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeCart(){
+  document.getElementById('cartDrawer').classList.remove('open');
+  document.getElementById('cartOverlay').classList.remove('open');
+  document.body.style.overflow='';
+  // Reset form
+  document.getElementById('orderForm').classList.remove('show');
+  document.getElementById('checkoutBtn').style.display = getCount() ? 'block' : 'none';
+}
+function showOrderForm(){
+  document.getElementById('orderForm').classList.add('show');
+  document.getElementById('checkoutBtn').style.display='none';
+}
+
+/* ── Submit order to Supabase ── */
+async function submitOrder(){
+  const name = document.getElementById('orderName').value.trim();
+  const phone = document.getElementById('orderPhone').value.trim();
+  if(!name||!phone){ showToast('❌ نام و شماره الزامیه'); return; }
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled=true; btn.textContent='در حال ارسال...';
+
+  const orderData = {
+    customer_name: name,
+    phone: phone,
+    address: document.getElementById('orderAddress').value.trim(),
+    items: JSON.stringify(Object.entries(cart).map(([id,qty])=>{
+      const item=MENU.find(m=>m.id==id);
+      return {id,name:item?.name,qty,price:item?.price,total:item?.price*qty};
+    })),
+    total: getTotal(),
+    status: 'pending',
+    created_at: new Date().toISOString()
+  };
+
+  // ── TELEGRAM BOT CONFIG ──────────────────────────────
+  // 1. به @BotFather پیام بده → /newbot → TOKEN میگیری
+  // 2. بات رو به گروه/کانالت اضافه کن (ادمین)
+  // 3. CHAT_ID گروه رو بذار (مثلاً -1001234567890)
+  // ────────────────────────────────────────────────────
+  const TG_TOKEN = 'YOUR_BOT_TOKEN';
+  const TG_CHAT  = 'YOUR_CHAT_ID';
+  const TELEGRAM_READY = TG_TOKEN !== 'YOUR_BOT_TOKEN';
+
+  if(DEMO_MODE && !TELEGRAM_READY){
+    showToast('⚠️ اول بات تلگرام یا Supabase رو تنظیم کن');
+    btn.disabled=false; btn.textContent='ثبت سفارش 🚀';
+    return;
+  }
+
+  if(TELEGRAM_READY){
+    const itemsLines = Object.entries(cart).map(([id,qty])=>{
+      const item=MENU.find(m=>m.id==id);
+      return `• ${item?.name}  ×${qty}  =  ${(item?.price||0)*qty}T`;
+    }).join('\n');
+    const now = new Date().toLocaleString('fa-IR');
+    const msg =
+`🍔 *سفارش جدید — عمو رسول*
+━━━━━━━━━━━━━━━━
+👤 نام: ${name}
+📞 تلفن: ${phone}
+📍 آدرس: ${document.getElementById('orderAddress').value||'—'}
+━━━━━━━━━━━━━━━━
+${itemsLines}
+━━━━━━━━━━━━━━━━
+💰 *جمع کل: ${getTotal()}T تومان*
+🕐 ${now}`;
+    try{
+      const r = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({chat_id:TG_CHAT, text:msg, parse_mode:'Markdown'})
+      });
+      if(r.ok){
+        showToast('🎉 سفارش ثبت شد!');
+        cart={};updateCartUI();closeCart();
+        btn.textContent='ثبت شد ✓';
+      } else { throw new Error(); }
+    }catch(e){
+      showToast('❌ خطا — دوباره امتحان کن');
+      btn.disabled=false; btn.textContent='ثبت سفارش 🚀';
+    }
+    return;
+  }
+
+  try{
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/orders`,{
+      method:'POST',
+      headers:{
+        'apikey':SUPABASE_KEY,
+        'Authorization':'Bearer '+SUPABASE_KEY,
+        'Content-Type':'application/json',
+        'Prefer':'return=minimal'
+      },
+      body:JSON.stringify(orderData)
+    });
+    if(r.ok){
+      showToast('🎉 سفارش ثبت شد!');
+      cart={};updateCartUI();closeCart();
+      btn.textContent='ثبت شد ✓';
+    } else {
+      throw new Error('Server error');
+    }
+  }catch(e){
+    showToast('❌ خطا — دوباره امتحان کن');
+    btn.disabled=false;btn.textContent='ثبت سفارش 🚀';
+  }
+}
+
+/* ── Toast ── */
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+/* ── Wire up add-to-cart buttons after DOM ready ── */
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('[data-item-id]').forEach(btn=>{
+    btn.addEventListener('click',()=> addToCart(+btn.dataset.itemId));
+  });
+});
+</script>
+
+</body>
+</html>
